@@ -1,31 +1,59 @@
 function getComputerChoice(){
-     let yes = Math.floor(Math.random() * 3) + 1;    // yang nie gunakan ranmdom no nak tentukan dapat apa
-    
-    if (yes === 1) {
-        console.log("Rock");            // so if random dapat no 1, akan keluar rock
-    } else if (yes === 2) {             // 2 dapat paper
-        console.log("Paper")            // 3 dapat scissor
-    } else if (yes === 3) {
-        console.log("Scissor");
-    }
+    let game = ["rock", "paper", "scissor"];
+    let yes = Math.floor(Math.random() * game.length);
+        return game[yes];
 };
-getComputerChoice();
 
-function getHumanChoice(){
-    let human = prompt("Choose your luck", "rock, paper or scissor");
-   
+let computer = getComputerChoice();
+console.log(computer)
+let player = prompt("Choose your luck", "rock, paper or scissor").toLowerCase();
+console.log(player)
 
-    if (human !== "rock" && human !== "paper" && human !== "scissor"){         //nie kalau user input tak letak betul marah user
-        console.log("try again");
-    } else {
-        console.log(`"You choose ${human}"`)
-    }
-};
-getHumanChoice();
-
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
+    
+    function playRound(player, computer){
 
-function playRound(humanChoice, computerChoice){
+        if (player === computer){
+            return "draw";
+        
+        }   else if (player == "rock" && computer == "paper"){
+            //computerScore++
+                return "computer win";
+        }  else if (player == "scissor" && computer == "rock"){
+                //computerScore++
+                return "computer win";
+        } else if ( player == "paper" && computer == "scissor"){
+                //computerScore++
+                return "computer win";
+            } else {
+                //playerScore++
+                return "you win";
+            }
+        }
+playRound();
+//console.log(playerScore)
+//console.log(computerScore)
+//console.log(playRound(player,computer));
+function playGame(){
+    for (i = 1; i < 3; i++){
+        let result = playRound(player,computer)
+        console.log(result)
+        if (result == "you win"){
+            playerScore++
+            console.log(playerScore)
+        } else {
+            computerScore++
+            console.log(computerScore)
+        }
+        
+        if (playerScore > computerScore){
+            return "Player win! GAME OVER";
+        } else {
+            return "Computer Win! GAME OVER";
+        }
+    }
+ }
 
-}
+let end = playGame();
+console.log(end) 
