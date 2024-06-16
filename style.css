@@ -1,0 +1,44 @@
+.text{
+    text-align: center;
+}
+
+.choices{
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    gap: 20px;
+}
+
+button{
+    width: 100px;
+    text-align: center;
+}
+
+#playerDisplay{
+    text-align: center;
+    font-size: 1.5rem;
+
+}
+
+#computerDisplay{
+    text-align: center;
+    font-size: 1.5rem;
+
+}
+
+#resultDisplay{
+    text-align: center;
+    font-size: 3rem;
+}
+
+.gameScore{
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.greenText {
+    color: green;
+}
+.redText  {
+    color: red;
+}

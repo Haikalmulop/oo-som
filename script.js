@@ -1,59 +1,61 @@
-function getComputerChoice(){
-    let game = ["rock", "paper", "scissor"];
-    let yes = Math.floor(Math.random() * game.length);
-        return game[yes];
-};
-
-let computer = getComputerChoice();
-console.log(computer)
-let player = prompt("Choose your luck", "rock, paper or scissor").toLowerCase();
-console.log(player)
+const choices = ["Rock", "Paper", "Scissor"];
+const playerDisplay = document.getElementById("playerDisplay");
+const computerDisplay = document.getElementById("computerDisplay");
+const resultDisplay = document.getElementById("resultDisplay");
+const playerScoreDisplay = document.getElementById("playerScoreDisplay");
+const computerScoreDisplay = document.getElementById("computerScoreDisplay");
 
 let playerScore = 0;
 let computerScore = 0;
-    
-    function playRound(player, computer){
 
-        if (player === computer){
-            return "draw";
-        
-        }   else if (player == "rock" && computer == "paper"){
-            //computerScore++
-                return "computer win";
-        }  else if (player == "scissor" && computer == "rock"){
-                //computerScore++
-                return "computer win";
-        } else if ( player == "paper" && computer == "scissor"){
-                //computerScore++
-                return "computer win";
-            } else {
-                //playerScore++
-                return "you win";
+
+function playGame(playerChoices){
+
+    const computerChoices = choices[Math.floor(Math.random() * choices.length)]
+    let result = "";  
+    //console.log(computerChoices)
+
+    if (playerChoices === computerChoices) {
+        result = "Draw";
+    }
+    else{
+        switch(playerChoices){
+            case "Rock":
+                result = (computerChoices === "Scissor") ? "You Win!" : "You Lose!";
+                //console.log(result)
+                break;
+            case "Paper":
+                result = (computerChoices === "Rock") ? "You Win!" : "You Lose!";
+                //console.log(result)
+                break;
+            case "Scissor":
+                result = (computerChoices === "Paper") ? "You Win!" : "You Lose!";
+                //console.log(result)
+            break;
             }
         }
-playRound();
-//console.log(playerScore)
-//console.log(computerScore)
-//console.log(playRound(player,computer));
-function playGame(){
-    for (i = 1; i < 3; i++){
-        let result = playRound(player,computer)
-        console.log(result)
-        if (result == "you win"){
-            playerScore++
-            console.log(playerScore)
-        } else {
-            computerScore++
-            console.log(computerScore)
-        }
-        
-        if (playerScore > computerScore){
-            return "Player win! GAME OVER";
-        } else {
-            return "Computer Win! GAME OVER";
-        }
-    }
- }
+       
+       playerDisplay.textContent = `Player: ${playerChoices}`;
+       computerDisplay.textContent = `Computer: ${computerChoices}`;
+       resultDisplay.textContent = result;
 
-let end = playGame();
-console.log(end) 
+       resultDisplay.classList.remove("greenText", "redText");
+
+       switch(result){
+        case "You Win!":
+            resultDisplay.classList.add("greenText");
+            playerScore++
+            playerScoreDisplay.textContent = playerScore;
+            break;
+        case "You Lose!":
+            resultDisplay.classList.add("redText");
+            computerScore++
+            computerScoreDisplay.textContent = computerScore;
+            break;
+       };
+
+       if (playerScore === 5 || computerScore === 5){
+        computerScore = -1;
+        playerScore = -1;
+        };
+};
